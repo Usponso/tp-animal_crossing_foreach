@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="/img/animal_crossing_logo.png" width="100">
@@ -33,6 +33,7 @@
         </div>
     </div>
 </nav>
+
 <div class="container">
     <div class="row">
         <h1 class="text-center" style="margin-top:30px; margin-bottom: 20px">${ile.getNomIle()}</h1>
@@ -49,6 +50,7 @@
             </div>
         </c:if>
 
+        <!-- Tableau des cinemas -->
         <div class="col-lg-3 col-xs-12">
             <div class="row">
                 <div class="col-lg-6">Cinemas</div>
@@ -64,6 +66,7 @@
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Nombre de places</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,12 +74,14 @@
                     <tr>
                         <td>${cinema.getNomCinema()}</td>
                         <td>${cinema.getNbPlacesCinema()}</td>
+                        <td><a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
 
+        <!-- Tableau des batiments -->
         <div class="col-lg-3 col-xs-12">
             <div class="row">
                 <div class="col-lg-6">Batiments</div>
@@ -111,6 +116,7 @@
             </table>
         </div>
 
+        <!-- Tableau des forets -->
         <div class="col-lg-3 col-xs-12">
             <div class="row">
                 <div class="col-lg-6">Forets</div>
@@ -139,6 +145,7 @@
             </table>
         </div>
 
+        <!-- Tableau des espaces -->
         <div class="col-lg-3 col-xs-12">
             <div class="row">
                 <div class="col-lg-6">Espaces naturels</div>

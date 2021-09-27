@@ -5,10 +5,7 @@ import com.animal_crossing.animal_crossing_tp.main.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -69,7 +66,7 @@ public class IleController {
         }
     }
 
-    @PostMapping("updateIle")
+    @PostMapping("/updateIle")
     public ModelAndView updateIle(@RequestParam("idJoueur") int idJoueur,
                                   @RequestParam("idArchipel") int idArchipel,
                                   @RequestParam("idIle") int idIle,
@@ -378,5 +375,51 @@ public class IleController {
             model.addAttribute("erreur", "Une erreur est survenue.");
             return new ModelAndView("login", model);
         }
+    }
+
+    @GetMapping("/deleteCinema/{idJoueur}/{idIle}/{idCinema}")
+    public ModelAndView deleteCinema(@PathVariable("idJoueur") int idJoueur,
+                                     @PathVariable("idIle") int idIle,
+                                     @PathVariable("idCinema") int idCinema,
+                                     ModelMap model){
+
+        Joueur joueur = joueurDAO.getJoueurById(idJoueur);
+        if(joueur != null){
+            model.addAttribute("joueur",joueur);
+            Archipel archipel = archipelDAO.getArchipelByIdJoueur(idJoueur);
+            if(archipel != null){
+                model.addAttribute("archipel",archipel);
+                Ile ile = ileDAO.getIleById(idIle,archipel.getIdArchipel());
+                if(ile != null){
+                    model.addAttribute("ile",ile);
+                    List<Batiment> listeBatiments = batimentDAO.getBatimentsByIdIle(ile.getIdIle());
+                    List<Foret> listeForets = foretDAO.getForetsByIdIle(ile.getIdIle());
+                    List<EspaceNaturel> listeEspaces = espaceNaturelDAO.getEspacesByIdIle(ile.getIdIle());
+                    List<TypeBatiment> listeTypeBatiment = typeBatimentDAO.getAllTypeBatiments();
+                    List<TypeEspace> listeTypeEspace = typeEspaceDAO.getAllTypeEspaces();
+
+                    //Verifier si le cinema existe vraiment avant de supprimer
+                    int resultat = cinemaDAO.deleteCinema(idIle,idCinema);
+                    if(resultat == 1){
+                        model.addAttribute("success","Suppression réussie.");
+                    }
+                    else{
+                        model.addAttribute("erreur","La suppression a échoué.");
+                    }
+                    List<Cinema> listeCinemas = cinemaDAO.getCinemasByIdIle(ile.getIdIle());
+
+                    model.addAttribute("cinemas", listeCinemas);
+                    model.addAttribute("batiments", listeBatiments);
+                    model.addAttribute("forets", listeForets);
+                    model.addAttribute("espaces", listeEspaces);
+                    model.addAttribute("typesBatiments",listeTypeBatiment);
+                    model.addAttribute("typesEspaces",listeTypeEspace);
+
+                    return new ModelAndView("ile", model);
+                } //GERER LES CAS D'ERREUR
+            }
+
+        }
+        return new ModelAndView("login", model);
     }
 }

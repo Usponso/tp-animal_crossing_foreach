@@ -49,4 +49,19 @@ public class CinemaDAO extends JdbcDaoSupport {
             return 0;
         }
     }
+
+    public int deleteCinema(int idIle, int idCinema){
+        String sql = //
+                "DELETE FROM cinema WHERE id_ile = ? AND id_cinema = ?";
+
+        Object[] params = new Object[]{ idIle, idCinema };
+
+        try{
+            int resultat = this.getJdbcTemplate().update(sql, params);
+            return resultat;
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
 }
