@@ -1,0 +1,54 @@
+@font-face {
+    src: url("/fonts/FinkHeavy.ttf");
+    font-family: "FinkHeavy";
+}
+
+body{
+    font-family: "FinkHeavy";
+    color: maroon;
+    height: 100vh;
+    background-image: url("/img/wallpaper_animal_crossing.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.input-group-text {
+    min-width: 90px;
+}
+
+.box{
+    background: #FFF;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 40px 10px;
+    margin: 20px 0px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+    min-height: 280px;
+    max-height: 280px;
+    opacity: 0.8;
+}
+
+.box:hover{
+    box-shadow: 0 0 6px maroon;
+    /*transform: scale(1.1);*/
+}
+
+.box-ile .title-ile:hover{
+    text-decoration: underline;
+    text-underline: maroon;
+}
+
+.box .box-text{
+    margin:20px 0px;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.box .box-btn a{
+    text-decoration: none;
+    color: #4183D7;
+    font-size: 16px;
+}
