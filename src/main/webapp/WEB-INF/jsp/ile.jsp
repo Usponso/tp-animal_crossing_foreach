@@ -32,6 +32,11 @@
                 <a class="nav-link" href="/allJoueurs">Liste des joueurs</a>
             </div>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-danger" href="http://localhost:8080/logout">
+                <i class="fa fa-power-off"></i>
+            </a>
+        </div>
     </div>
 </nav>
 
@@ -75,7 +80,7 @@
                     <tr>
                         <td>${cinema.getNomCinema()}</td>
                         <td>${cinema.getNbPlacesCinema()}</td>
-                        <td>
+                        <td class="action">
                             <a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </a>
@@ -84,6 +89,9 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterFilmModal">
+                <i class="fa fa-film"></i> Ajouter un film
+            </button>
         </div>
 
         <!-- Tableau des batiments -->
@@ -116,7 +124,7 @@
                                 </c:if>
                             </c:forEach>
                         </td>
-                        <td>
+                        <td class="action">
                             <a href="http://localhost:8080/deleteBatiment/${joueur.getIdJoueur()}/${ile.getIdIle()}/${batiment.getIdBatiment()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </a>
@@ -151,7 +159,7 @@
                     <tr>
                         <td>${foret.getNomForet()}</td>
                         <td>${foret.getSuperficieForet()}</td>
-                        <td>
+                        <td class="action">
                             <a href="http://localhost:8080/deleteForet/${joueur.getIdJoueur()}/${ile.getIdIle()}/${foret.getIdForet()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </a>
@@ -192,7 +200,7 @@
                                 </c:if>
                             </c:forEach>
                         </td>
-                        <td>
+                        <td class="action">
                             <a href="http://localhost:8080/deleteEspace/${joueur.getIdJoueur()}/${ile.getIdIle()}/${espace.getIdEspace()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </a>
@@ -222,6 +230,33 @@
                         <input type="hidden" name="idIle" value="${ile.getIdIle()}">
                         <label for="nomCinemaInput" class="form-label">Nom du cinéma</label>
                         <input type="text" class="form-control" id="nomCinemaInput" name="nomCinema" placeholder="Ex: Les Etoiles" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal creation cinema -->
+<div class="modal fade" id="ajouterFilmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/ajouterFilm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filmModalLabel">Ajouter un film</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <input type="hidden" name="idJoueur" value="<c:out value="${joueur.getIdJoueur()}"/>">
+                        <input type="hidden" name="idArchipel" value="${archipel.getIdArchipel()}">
+                        <input type="hidden" name="idIle" value="${ile.getIdIle()}">
+                        <label for="nomFilmInput" class="form-label">Nom du film</label>
+                        <input type="text" class="form-control" id="nomFilmInput" name="nomFilm" placeholder="Ex: Kaamelott : Premier Volet" required>
                     </div>
                 </div>
                 <div class="modal-footer">

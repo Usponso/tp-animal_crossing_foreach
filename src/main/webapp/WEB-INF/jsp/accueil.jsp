@@ -26,6 +26,11 @@
                 <a class="nav-link" href="/allJoueurs">Liste des joueurs</a>
             </div>
         </div>
+        <div class="d-flex">
+            <a class="btn btn-danger" href="http://localhost:8080/logout">
+                <i class="fa fa-power-off"></i>
+            </a>
+        </div>
     </div>
 </nav>
 

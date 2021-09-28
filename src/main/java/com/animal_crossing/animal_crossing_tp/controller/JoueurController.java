@@ -29,7 +29,11 @@ public class JoueurController {
     }
 
     @PostMapping("/updateJoueur")
-    public ModelAndView updateJoueur(@RequestParam("id") int id, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("mail") String mail, ModelMap model){
+    public ModelAndView updateJoueur(@RequestParam("id") int id,
+                                     @RequestParam("nom") String nom,
+                                     @RequestParam("prenom") String prenom,
+                                     @RequestParam("mail") String mail,
+                                     ModelMap model){
         Joueur joueur = new Joueur(id,nom,prenom,mail);
         if(joueurDAO.updateJoueur(joueur) == 1){
             model.addAttribute("joueur",joueur);

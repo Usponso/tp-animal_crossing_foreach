@@ -31,7 +31,11 @@ public class MainController {
     }
 
     @PostMapping("/accueil")
-    public ModelAndView accueil(@RequestParam("id") String idJoueur, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("mail") String mail, ModelMap model){
+    public ModelAndView accueil(@RequestParam("id") String idJoueur,
+                                @RequestParam("nom") String nom,
+                                @RequestParam("prenom") String prenom,
+                                @RequestParam("mail") String mail,
+                                ModelMap model){
         try{
             model.addAttribute("joueur", new Joueur(Integer.parseInt(idJoueur), nom, prenom, mail));
             Archipel archipel = archipelDAO.getArchipelByIdJoueur(Integer.parseInt(idJoueur));
@@ -90,5 +94,10 @@ public class MainController {
             model.addAttribute("erreur", "Aucun compte ne correspond à ces identifiants.");
             return new ModelAndView("login", model);
         }
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logout(ModelMap model){
+        return new ModelAndView("login",model);
     }
 }

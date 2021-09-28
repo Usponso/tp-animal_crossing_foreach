@@ -6,6 +6,7 @@
 <head>
     <title>Profil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -30,6 +31,11 @@
                 <a class="nav-link active" aria-current="page" href="#">Profil</a>
                 <a class="nav-link" href="/allJoueurs">Liste des joueurs</a>
             </div>
+        </div>
+        <div class="d-flex">
+            <a class="btn btn-danger" href="http://localhost:8080/logout">
+                <i class="fa fa-power-off"></i>
+            </a>
         </div>
     </div>
 </nav>
