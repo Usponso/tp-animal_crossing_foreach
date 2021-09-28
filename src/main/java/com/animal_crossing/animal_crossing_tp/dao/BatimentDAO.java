@@ -49,4 +49,19 @@ public class BatimentDAO extends JdbcDaoSupport {
             return 0;
         }
     }
+
+    public int deleteBatiment(int idIle, int idBatiment){
+        String sql = //
+                "DELETE FROM batiment WHERE id_ile = ? AND id_batiment = ?";
+
+        Object[] params = new Object[] { idIle, idBatiment };
+
+        try{
+            int resultat = this.getJdbcTemplate().update(sql, params);
+            return resultat;
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
 }

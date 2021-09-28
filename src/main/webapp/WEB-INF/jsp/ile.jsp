@@ -6,6 +6,7 @@
 <head>
     <title>${ile.getNomIle()}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -74,7 +75,11 @@
                     <tr>
                         <td>${cinema.getNomCinema()}</td>
                         <td>${cinema.getNbPlacesCinema()}</td>
-                        <td><a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>
+                            <a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -97,6 +102,7 @@
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">ID Type</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -109,6 +115,11 @@
                                     ${type.getNomTypeBatiment()}
                                 </c:if>
                             </c:forEach>
+                        </td>
+                        <td>
+                            <a href="http://localhost:8080/deleteBatiment/${joueur.getIdJoueur()}/${ile.getIdIle()}/${batiment.getIdBatiment()}" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

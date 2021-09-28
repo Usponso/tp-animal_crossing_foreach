@@ -418,7 +418,52 @@ public class IleController {
                     return new ModelAndView("ile", model);
                 } //GERER LES CAS D'ERREUR
             }
+        }
+        return new ModelAndView("login", model);
+    }
 
+    @GetMapping("/deleteBatiment/{idJoueur}/{idIle}/{idBatiment}")
+    public ModelAndView deleteBatiment(@PathVariable("idJoueur") int idJoueur,
+                                       @PathVariable("idIle") int idIle,
+                                       @PathVariable("idBatiment") int idBatiment,
+                                       ModelMap model){
+
+        Joueur joueur = joueurDAO.getJoueurById(idJoueur);
+        if(joueur != null){
+            model.addAttribute("joueur",joueur);
+            Archipel archipel = archipelDAO.getArchipelByIdJoueur(idJoueur);
+            if(archipel != null){
+                model.addAttribute("archipel",archipel);
+                Ile ile = ileDAO.getIleById(idIle,archipel.getIdArchipel());
+                if(ile != null){
+                    model.addAttribute("ile",ile);
+
+                    List<Cinema> listeCinemas = cinemaDAO.getCinemasByIdIle(ile.getIdIle());
+                    List<Foret> listeForets = foretDAO.getForetsByIdIle(ile.getIdIle());
+                    List<EspaceNaturel> listeEspaces = espaceNaturelDAO.getEspacesByIdIle(ile.getIdIle());
+                    List<TypeBatiment> listeTypeBatiment = typeBatimentDAO.getAllTypeBatiments();
+                    List<TypeEspace> listeTypeEspace = typeEspaceDAO.getAllTypeEspaces();
+
+                    //Verifier si le batiment existe vraiment avant de supprimer
+                    int resultat = batimentDAO.deleteBatiment(idIle,idBatiment);
+                    if(resultat == 1){
+                        model.addAttribute("success","Suppression réussie.");
+                    }
+                    else{
+                        model.addAttribute("erreur","La suppression a échoué.");
+                    }
+                    List<Batiment> listeBatiments = batimentDAO.getBatimentsByIdIle(ile.getIdIle());
+
+                    model.addAttribute("cinemas", listeCinemas);
+                    model.addAttribute("batiments", listeBatiments);
+                    model.addAttribute("forets", listeForets);
+                    model.addAttribute("espaces", listeEspaces);
+                    model.addAttribute("typesBatiments",listeTypeBatiment);
+                    model.addAttribute("typesEspaces",listeTypeEspace);
+
+                    return new ModelAndView("ile", model);
+                } //GERER LES CAS D'ERREUR
+            }
         }
         return new ModelAndView("login", model);
     }
