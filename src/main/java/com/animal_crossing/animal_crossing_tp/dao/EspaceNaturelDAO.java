@@ -50,4 +50,19 @@ public class EspaceNaturelDAO extends JdbcDaoSupport {
             return 0;
         }
     }
+
+    public int deleteEspace(int idIle, int idEspace){
+        String sql = //
+                "DELETE FROM espace_naturel WHERE id_ile = ? AND id_espace = ?";
+
+        Object[] params = new Object[] { idIle, idEspace };
+
+        try{
+            int resultat = this.getJdbcTemplate().update(sql, params);
+            return resultat;
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
 }

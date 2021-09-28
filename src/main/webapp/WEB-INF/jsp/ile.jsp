@@ -66,7 +66,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">Nombre de places</th>
+                    <th scope="col">Places</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -101,7 +101,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">ID Type</th>
+                    <th scope="col">Type</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -143,6 +143,7 @@
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Superficie</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -150,6 +151,11 @@
                     <tr>
                         <td>${foret.getNomForet()}</td>
                         <td>${foret.getSuperficieForet()}</td>
+                        <td>
+                            <a href="http://localhost:8080/deleteForet/${joueur.getIdJoueur()}/${ile.getIdIle()}/${foret.getIdForet()}" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -171,7 +177,8 @@
                 <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">ID Type</th>
+                    <th scope="col">Type</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -184,6 +191,11 @@
                                     ${type.getNomTypeEspace()}
                                 </c:if>
                             </c:forEach>
+                        </td>
+                        <td>
+                            <a href="http://localhost:8080/deleteEspace/${joueur.getIdJoueur()}/${ile.getIdIle()}/${espace.getIdEspace()}" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

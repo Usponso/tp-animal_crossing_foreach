@@ -50,4 +50,20 @@ public class ForetDAO extends JdbcDaoSupport {
             return 0;
         }
     }
+
+    public int deleteForet(int idIle, int idForet){
+        String sql = //
+                "DELETE FROM foret WHERE id_ile = ? AND id_foret = ?";
+
+        Object[] params = new Object[] { idIle, idForet };
+
+        try{
+            int resultat = this.getJdbcTemplate().update(sql, params);
+
+            return resultat;
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
 }
