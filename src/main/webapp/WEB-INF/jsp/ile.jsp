@@ -78,8 +78,8 @@
                 <tbody>
                 <c:forEach items="${cinemas}" var="cinema">
                     <tr>
-                        <td>${cinema.getNomCinema()}</td>
-                        <td>${cinema.getNbPlacesCinema()}</td>
+                        <td style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">${cinema.getNomCinema()}</td>
+                        <td>${cinema.getNbPlacesCinema()}</td> <!-- GERER MODAL AVEC ID CINEMA -->
                         <td class="action">
                             <a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
@@ -242,6 +242,33 @@
 </div>
 
 <!-- Modal creation cinema -->
+<div class="modal fade" id="ajouterCinemaModal" tabindex="-1" aria-labelledby="cinemaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/creerCinema" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cinemaModalLabel">Ajouter un cinéma</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <input type="hidden" name="idJoueur" value="<c:out value="${joueur.getIdJoueur()}"/>">
+                        <input type="hidden" name="idArchipel" value="${archipel.getIdArchipel()}">
+                        <input type="hidden" name="idIle" value="${ile.getIdIle()}">
+                        <label for="nomCinemaInput" class="form-label">Nom du cinéma</label>
+                        <input type="text" class="form-control" id="nomCinemaInput" name="nomCinema" placeholder="Ex: Les Etoiles" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal creation film -->
 <div class="modal fade" id="ajouterFilmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="/ajouterFilm" method="post">

@@ -610,5 +610,6 @@ public class IleController {
             model.addAttribute("erreur", "Une erreur est survenue.");
             return new ModelAndView("login", model);
         }
+        return new ModelAndView("login", model);
     }
 }

@@ -4,11 +4,13 @@ public class Film {
     //ATTRIBUTS
     private int idFilm;
     private String nomFilm;
+    private int nbPlaces;
 
     //CONSTRUCTEURS
-    public Film(int idFilm, String nomFilm){
+    public Film(int idFilm, String nomFilm, int nbPlaces){
         this.idFilm = idFilm;
         this.nomFilm = nomFilm;
+        this.nbPlaces = nbPlaces;
     }
 
     //GETTER ET SETTER

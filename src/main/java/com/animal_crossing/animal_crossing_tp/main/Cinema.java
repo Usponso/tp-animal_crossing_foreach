@@ -1,11 +1,14 @@
 package com.animal_crossing.animal_crossing_tp.main;
 
+import java.util.List;
+
 public class Cinema {
     //ATTRIBUTS
     private int idCinema;
     private String nomCinema;
     private int nbPlacesCinema;
     private int idIle;
+    private List<Film> films;
 
     //CONSTRUCTEURS
     public Cinema(int idCinema, String nomCinema, int nbPlacesCinema, int idIle){
@@ -13,6 +16,14 @@ public class Cinema {
         this.nomCinema = nomCinema;
         this.nbPlacesCinema = nbPlacesCinema;
         this.idIle = idIle;
+    }
+
+    //METHODES
+    public void addFilm(Film film){
+        this.films.add(film);
+    }
+
+    public Cinema() {
     }
 
     //GETTER ET SETTER
@@ -47,4 +58,8 @@ public class Cinema {
     public void setIdIle(int idIle) {
         this.idIle = idIle;
     }
+
+    public List<Film> getFilms(){ return this.films; }
+
+    public void setFilms(List<Film> films){ this.films = films; }
 }
