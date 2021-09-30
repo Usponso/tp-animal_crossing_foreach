@@ -80,7 +80,7 @@
                     <tr>
                         <td style="cursor: pointer" >${cinema.getNomCinema()}</td>
                         <td>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">
                                 <i class="fa fa-ticket"></i> Voir
                             </button>
                         </td>
@@ -93,9 +93,12 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterFilmModal">
-                <i class="fa fa-film"></i> Ajouter un film
-            </button>
+            <hr>
+            <div class="text-center">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterFilmModal">
+                    <i class="fa fa-film"></i> Ajouter un film
+                </button>
+            </div>
         </div>
 
         <!-- Tableau des batiments -->

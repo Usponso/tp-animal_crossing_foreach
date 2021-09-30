@@ -7,10 +7,13 @@ import com.animal_crossing.animal_crossing_tp.map.FilmMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -51,10 +54,23 @@ public class CinemaDAO extends JdbcDaoSupport {
         String sql = //
                 "INSERT INTO cinema(nom_cinema,id_ile) VALUES(?,?)";
 
-        Object[] params = new Object[] { nomCinema,idIle }; //Paramètres de la requête qui remplaceront les ?
-
         try{
-            int resultat = this.getJdbcTemplate().update(sql, params); //On récupère l'objet User correspondant à la requête
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            PreparedStatement ps = null;
+
+            int insert = this.getJdbcTemplate().update(connection -> {
+                PreparedStatement ps1 = connection.prepareStatement(sql, new String[]{"id"});
+                ps1.setString(1, nomCinema);
+                ps1.setInt(2, idIle);
+                return ps1;
+            }, keyHolder);
+
+            String sql2 = "INSERT INTO affiche_film(id_cinema,id_film) (SELECT id_cinema, id_film FROM cinema, film WHERE id_cinema = ?)";
+
+            Object[] params = new Object[]{ keyHolder.getKey().intValue() };
+
+            int resultat = this.getJdbcTemplate().update(sql2,params);
+
             return resultat;
         }
         catch (EmptyResultDataAccessException e){

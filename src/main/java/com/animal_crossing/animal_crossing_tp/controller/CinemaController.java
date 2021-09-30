@@ -52,7 +52,14 @@ public class CinemaController {
                 Ile ile = ileDAO.getIleById(idIle,idArchipel); //On récupère l'ile en question
                 if(ile != null){
 
-                    //AJOUTER FILM A LA BASE ET COMPLETER TABLE AFFICHE_FILM
+                    resultat = filmDAO.ajouterFilm(nomFilm);
+
+                    if(resultat == 0){
+                        model.addAttribute("erreur", "Une erreur est survenue lors de la réservation.");
+                    }
+                    else{
+                        model.addAttribute("success", "La réservation a réussi.");
+                    }
 
                     List<Cinema> listeCinemas = cinemaDAO.getCinemasByIdIle(ile.getIdIle());
                     List<Batiment> listeBatiments = batimentDAO.getBatimentsByIdIle(ile.getIdIle());
@@ -98,7 +105,7 @@ public class CinemaController {
                                        @RequestParam("nbPlaces") int nbPlaces,
                                        ModelMap model){
 
-        System.out.println("JOUEUR : " + idJoueur + " / ARCHIPEL : " + idArchipel + " / ILE : " + idIle + " / CINEMA : " + idCinema + " / FILM : " + idFilm + " / PLACES : " + nbPlaces);
+        //System.out.println("JOUEUR : " + idJoueur + " / ARCHIPEL : " + idArchipel + " / ILE : " + idIle + " / CINEMA : " + idCinema + " / FILM : " + idFilm + " / PLACES : " + nbPlaces);
 
         Joueur joueur = joueurDAO.getJoueurById(idJoueur);
         int resultat = 0;
