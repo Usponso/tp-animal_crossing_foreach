@@ -29,4 +29,8 @@ public class Film {
     public void setNomFilm(String nomFilm) {
         this.nomFilm = nomFilm;
     }
+
+    public int getNbPlaces(){ return this.nbPlaces; }
+
+    public void setNbPlaces(int nbPlaces){ this.nbPlaces = nbPlaces; }
 }

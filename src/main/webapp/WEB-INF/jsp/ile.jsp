@@ -71,15 +71,19 @@
                 <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">Places</th>
+                    <th scope="col">Séances</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${cinemas}" var="cinema">
                     <tr>
-                        <td style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">${cinema.getNomCinema()}</td>
-                        <td>${cinema.getNbPlacesCinema()}</td> <!-- GERER MODAL AVEC ID CINEMA -->
+                        <td style="cursor: pointer" >${cinema.getNomCinema()}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">
+                                <i class="fa fa-ticket"></i> Voir
+                            </button>
+                        </td>
                         <td class="action">
                             <a href="http://localhost:8080/deleteCinema/${joueur.getIdJoueur()}/${ile.getIdIle()}/${cinema.getIdCinema()}" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
@@ -241,32 +245,54 @@
     </div>
 </div>
 
-<!-- Modal creation cinema -->
-<div class="modal fade" id="ajouterCinemaModal" tabindex="-1" aria-labelledby="cinemaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="/creerCinema" method="post">
+<c:forEach items="${cinemas}" var="cinema">
+    <!-- Modal seances -->
+    <div class="modal fade" id="afficherSeancesModal${cinema.getIdCinema()}" tabindex="-1" aria-labelledby="seanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cinemaModalLabel">Ajouter un cinéma</h5>
+                    <h5 class="modal-title" id="seanceModalLabel">${cinema.getNomCinema()} : Séances</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="modal-body">
-                        <input type="hidden" name="idJoueur" value="<c:out value="${joueur.getIdJoueur()}"/>">
-                        <input type="hidden" name="idArchipel" value="${archipel.getIdArchipel()}">
-                        <input type="hidden" name="idIle" value="${ile.getIdIle()}">
-                        <label for="nomCinemaInput" class="form-label">Nom du cinéma</label>
-                        <input type="text" class="form-control" id="nomCinemaInput" name="nomCinema" placeholder="Ex: Les Etoiles" required>
-                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Film</th>
+                            <th scope="col">Places restantes</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${cinema.getFilms()}" var="film">
+                                <tr>
+                                    <td>${film.getNomFilm()}</td>
+                                    <td>${film.getNbPlaces()}</td>
+                                    <td>
+                                        <form action="/reserverSeance" method="post">
+                                            <input type="hidden" name="idJoueur" value="${joueur.getIdJoueur()}">
+                                            <input type="hidden" name="idArchipel" value="${archipel.getIdArchipel()}">
+                                            <input type="hidden" name="idIle" value="${ile.getIdIle()}">
+                                            <input type="hidden" name="idCinema" value="${cinema.getIdCinema()}">
+                                            <input type="hidden" name="idFilm" value="${film.getIdFilm()}">
+                                            <input type="hidden" name="nbPlaces" value="${film.getNbPlaces()}">
+
+                                            <input type="submit" class="btn btn-success" value="Réserver" <c:if test="${film.getNbPlaces()<=0}">disabled</c:if> >
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success">Ajouter</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</c:forEach>
+
 
 <!-- Modal creation film -->
 <div class="modal fade" id="ajouterFilmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
