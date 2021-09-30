@@ -15,7 +15,7 @@
             <h1 class="text-center">Liste de tous les joueurs</h1><br>
             <c:forEach items="${joueurs}" var="joueur">
                 <div class="col-lg-4 col-xs-12 text-center">
-                    <div class="box box-user">
+                    <div class="box box-archipel">
                         <img src="/icons/user_icon_2.png" alt="user-icon" style="width: 15%">
                         <div class="box-title">
                             <h3><c:out value="${joueur.getPrenomJoueur()}"/> <c:out value="${joueur.getNomJoueur()}"/></h3>

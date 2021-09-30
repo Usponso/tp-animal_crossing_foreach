@@ -78,7 +78,7 @@
                 <tbody>
                 <c:forEach items="${cinemas}" var="cinema">
                     <tr>
-                        <td style="cursor: pointer" >${cinema.getNomCinema()}</td>
+                        <td>${cinema.getNomCinema()}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#afficherSeancesModal${cinema.getIdCinema()}">
                                 <i class="fa fa-ticket"></i> Voir
@@ -258,7 +258,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table">
+                    <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Film</th>
